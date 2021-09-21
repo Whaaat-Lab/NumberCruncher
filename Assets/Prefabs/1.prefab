@@ -1,12 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6127302593471453747
+--- !u!1001 &7129875170037740105
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9040439141531456322, guid: 1131f97ef6e8f43eb9b9af4fac9a797f, type: 3}
+      propertyPath: vos.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9040439141531456322, guid: 1131f97ef6e8f43eb9b9af4fac9a797f, type: 3}
+      propertyPath: vos.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: b2b3ef0b64e3e4bc9ae9e552899a7944, type: 3}
+    - target: {fileID: 9040439141531456322, guid: 1131f97ef6e8f43eb9b9af4fac9a797f, type: 3}
+      propertyPath: vos.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: f750c3c57acfb4ea89e3d5b473c69d26, type: 3}
+    - target: {fileID: 9040439141531456322, guid: 1131f97ef6e8f43eb9b9af4fac9a797f, type: 3}
+      propertyPath: vos.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3c686001b88ca426d95e7dd9476b34a9, type: 3}
+    - target: {fileID: 9040439141531456322, guid: 1131f97ef6e8f43eb9b9af4fac9a797f, type: 3}
+      propertyPath: vos.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 70cfdad25649c4f9685650ef5bc587df, type: 3}
+    - target: {fileID: 9040439141531456322, guid: 1131f97ef6e8f43eb9b9af4fac9a797f, type: 3}
+      propertyPath: vos.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: b754a2e3aa8164d50b2bb63b831095cf, type: 3}
     - target: {fileID: 9040439141531456324, guid: 1131f97ef6e8f43eb9b9af4fac9a797f, type: 3}
       propertyPath: m_RootOrder
       value: 0
