@@ -6,9 +6,9 @@ public class mathsInput : MonoBehaviour {
     public String mathsInput_string;
     public GameObject mathsInput_displayObject;
     public GameObject[] animatedNumbers;
-
-    // TextMexh Version
-    // private TMP_Text mathsInput_displayText;
+    public AudioClip[] checkSounds;
+    private AudioSource checkSound;
+    public SpriteRenderer background;
 
     // Sprite Version
     private KeyCode enterKey = KeyCode.Return;
@@ -31,6 +31,7 @@ public class mathsInput : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         numberManager = GameObject.Find("numberManager");
+        checkSound = GameObject.Find("ResultSound").GetComponent<AudioSource>();
         Clear();
     }
 
@@ -74,15 +75,21 @@ public class mathsInput : MonoBehaviour {
     public IEnumerator Check() {
         if (mathsInput_string == mathsProblem.S.answer) {
             // Correct
+            checkSound.clip = checkSounds[0];
+            background.color = new Color(.92f, .82f, .126f, 1);
             foreach(Transform child in numberManager.transform) {
                 child.gameObject.GetComponent<numberBehavior>().EnterCruncher();
             }
         }
         else {
-            // Wrong!
+            background.color = new Color(1, 0, 0, 1);
+            checkSound.clip = checkSounds[1];
         }
 
+        checkSound.Play();
+
         yield return new WaitForSeconds(1.5f);
+        background.color = new Color(.4f, .46f, .61f, 1);
         Clear();
         yield return null;
     }

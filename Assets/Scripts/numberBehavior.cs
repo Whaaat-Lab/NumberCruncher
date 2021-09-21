@@ -2,24 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class numberBehavior : MonoBehaviour {
+public class numberBehavior : MonoBehaviour
+{
+    public int numberVal;
+    private AudioSource voice;
+    private AudioLowPassFilter lpf;
+    public AudioClip[] vos;
+
     private Rigidbody2D rb;
     
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+        voice = GetComponent<AudioSource>();
+        lpf = GetComponent<AudioLowPassFilter>();
         StartCoroutine(Jitter());
+        StartCoroutine(Speak());
 
     }
-
-    // Update is called once per frame
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.Z)) {
-            EnterCruncher();
-        }
-
-    }
-
+    
     public void EnterCruncher() {
         rb.gravityScale = 1;
         StartCoroutine(MoveParent());
@@ -28,6 +29,8 @@ public class numberBehavior : MonoBehaviour {
     private IEnumerator MoveParent() {
         yield return new WaitForSeconds(1); 
         transform.parent = GameObject.Find("numberCruncher").transform;
+        lpf.cutoffFrequency = 2000f;
+
 
     }
 
@@ -47,5 +50,16 @@ public class numberBehavior : MonoBehaviour {
         );
         yield return new WaitForSeconds(.2f);
         StartCoroutine(Jitter());
+    }
+
+    private IEnumerator Speak()
+    {
+        int r = Random.Range(0, vos.Length);
+        voice.clip = vos[r];
+        voice.Play();
+        // wait between two to four seconds
+        r = Random.Range(2, 4);
+        yield return new WaitForSeconds(r);
+        StartCoroutine(Speak());
     }
 }
