@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2729889508319428761, guid: 1131f97ef6e8f43eb9b9af4fac9a797f, type: 3}
       propertyPath: m_Pitch
-      value: 0.95
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 9040439141531456322, guid: 1131f97ef6e8f43eb9b9af4fac9a797f, type: 3}
       propertyPath: vos.Array.size

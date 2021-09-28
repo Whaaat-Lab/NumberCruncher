@@ -9,11 +9,15 @@ public class numberCruncher : MonoBehaviour
     private float numberAmt;
     public GameObject crunchAlert;
     private bool filledAlert;
+    private Animator crunchAnim;
+	private AudioSource scream;
 
     
     // Start is called before the first frame update
     void Start() {
         numberFill.fillAmount = 0;
+		crunchAnim = GetComponent<Animator>();
+		scream = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -25,7 +29,14 @@ public class numberCruncher : MonoBehaviour
             StartCoroutine(CrunchAlert());
             filledAlert = true;
         }
+		if(filledAlert && Input.GetKeyDown(KeyCode.A)){
+			StartCoroutine(Crunch());
+		}
     }
+
+	public void Scream(){
+		scream.Play();
+	} 
 
     private IEnumerator CrunchAlert()
     {
@@ -35,4 +46,13 @@ public class numberCruncher : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(CrunchAlert());
     }
+
+	private IEnumerator Crunch(){
+		crunchAnim.SetTrigger("Slam");
+		GameObject[] numbers = GameObject.FindGameObjectsWithTag("Number");
+        yield return new WaitForSeconds(1f);
+		for(int i=0; i<numbers.Length; i++){
+			Destroy(numbers[i].gameObject);
+		} 
+	}
 }
