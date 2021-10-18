@@ -10,21 +10,26 @@ public class numberCruncher : MonoBehaviour
     public GameObject crunchAlert;
     private bool filledAlert;
     private Animator crunchAnim;
-	private AudioSource scream;
+	private AudioSource numberCruncher_audio;
 
     
     // Start is called before the first frame update
     void Start() {
         numberFill.fillAmount = 0;
 		crunchAnim = GetComponent<Animator>();
-		scream = GetComponent<AudioSource>();
+		numberCruncher_audio = GameObject.Find("numberCruncher_audio").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
-    void Update() {
-        numberAmt = (this.transform.hierarchyCount - 4) / 35f;
-        numberFill.fillAmount = numberAmt;
-        if (numberAmt >= 1 && !filledAlert)
+    void Update()
+    {
+	    numberAmt = this.transform.hierarchyCount - 4;
+	    // get a percentage amount under 1
+	    float numberFillDisplay = numberAmt / GameManager.S.maxNums;
+	    numberFill.fillAmount = numberFillDisplay;
+        
+	    // Have we reached the max
+	    if (numberAmt >= GameManager.S.maxNums && !filledAlert)
         {
             StartCoroutine(CrunchAlert());
             filledAlert = true;
@@ -35,7 +40,7 @@ public class numberCruncher : MonoBehaviour
     }
 
 	public void Scream(){
-		scream.Play();
+		numberCruncher_audio.Play();
 	} 
 
     private IEnumerator CrunchAlert()
@@ -49,6 +54,7 @@ public class numberCruncher : MonoBehaviour
 
 	private IEnumerator Crunch(){
 		crunchAnim.SetTrigger("Slam");
+		Scream();
 		GameObject[] numbers = GameObject.FindGameObjectsWithTag("Number");
         yield return new WaitForSeconds(1f);
 		for(int i=0; i<numbers.Length; i++){

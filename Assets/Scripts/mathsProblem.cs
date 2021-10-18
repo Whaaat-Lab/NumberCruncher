@@ -32,14 +32,6 @@ public class mathsProblem : MonoBehaviour {
 		yield return null;
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
-		if (Input.GetKeyDown(KeyCode.A)) {
-			UpdateProblem();
-		}
-    }
-
 	public void UpdateProblem() {
 		int      r        = Random.Range(0, mathsProblems.Length);
 		string[] problem  = mathsProblems[r].Split('=');

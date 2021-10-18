@@ -7,7 +7,10 @@ public class mathsInput : MonoBehaviour {
     public GameObject mathsInput_displayObject;
     public GameObject[] animatedNumbers;
     public AudioClip[] checkSounds;
+    public AudioClip[] yays;
+    public AudioClip aww;
     private AudioSource checkSound;
+    private AudioSource crowdReaction;
     public SpriteRenderer background;
 
     // Sprite Version
@@ -32,6 +35,7 @@ public class mathsInput : MonoBehaviour {
     void Start() {
         numberManager = GameObject.Find("numberManager");
         checkSound = GameObject.Find("ResultSound").GetComponent<AudioSource>();
+        crowdReaction = GameObject.Find("audienceReaction").GetComponent<AudioSource>();
         Clear();
     }
 
@@ -76,6 +80,8 @@ public class mathsInput : MonoBehaviour {
         if (mathsInput_string == mathsProblem.S.answer) {
             // Correct
             checkSound.clip = checkSounds[0];
+            int r = UnityEngine.Random.Range(0, yays.Length);
+            crowdReaction.clip = yays[r];
             background.color = new Color(.92f, .82f, .126f, 1);
             foreach(Transform child in numberManager.transform) {
                 child.gameObject.GetComponent<numberBehavior>().EnterCruncher();
@@ -84,9 +90,11 @@ public class mathsInput : MonoBehaviour {
         else {
             background.color = new Color(1, 0, 0, 1);
             checkSound.clip = checkSounds[1];
+            crowdReaction.clip = aww;
         }
 
         checkSound.Play();
+        crowdReaction.Play();
 
         yield return new WaitForSeconds(1.5f);
         background.color = new Color(.4f, .46f, .61f, 1);
@@ -103,7 +111,8 @@ public class mathsInput : MonoBehaviour {
         float microOffset = UnityEngine.Random.Range(-0.5f, 0.5f);
         numberManager.transform.position = new Vector2(microOffset, numberManager.transform.position.y);
         numNums = 0;
-
+        
+        // build an if statement for number of numbers we have in our hopper
         mathsProblem.S.UpdateProblem();
     }
 }
