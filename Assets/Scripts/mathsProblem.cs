@@ -33,10 +33,14 @@ public class mathsProblem : MonoBehaviour {
 	}
 
 	public void UpdateProblem() {
-		int      r        = Random.Range(0, mathsProblems.Length);
-		string[] problem  = mathsProblems[r].Split('=');
-		string   question = problem[0].Replace("\n", "");
-		answer   = problem[1].Replace(" ","");
-		mathsProblem_display.text = question;
+		if(!GameManager.S.preCrunchingState || !GameManager.S.crunchingState){
+			int      r        = Random.Range(0, mathsProblems.Length);
+			string[] problem  = mathsProblems[r].Split('=');
+			string   question = problem[0].Replace("\n", "");
+			answer   = problem[1].Replace(" ","");
+			mathsProblem_display.text = question;
+		} else {
+			mathsProblem_display.text = "Time to Crunch!";
+		}
 	}
 }

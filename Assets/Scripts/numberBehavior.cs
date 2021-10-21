@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class numberBehavior : MonoBehaviour
 {
     public int numberVal;
+    public AudioMixer mixer;
     private AudioSource voice;
-    private AudioLowPassFilter lpf;
+    
     public AudioClip[] vos;
 
     private Rigidbody2D rb;
@@ -15,7 +17,6 @@ public class numberBehavior : MonoBehaviour
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         voice = GetComponent<AudioSource>();
-        lpf = GetComponent<AudioLowPassFilter>();
         StartCoroutine(Jitter());
         StartCoroutine(Speak());
 
@@ -29,7 +30,7 @@ public class numberBehavior : MonoBehaviour
     private IEnumerator MoveParent() {
         yield return new WaitForSeconds(1); 
         transform.parent = GameObject.Find("numberCruncher").transform;
-        lpf.cutoffFrequency = 2000f;
+        voice.outputAudioMixerGroup = mixer.FindMatchingGroups("HopperNumbers")[0];
 
 
     }

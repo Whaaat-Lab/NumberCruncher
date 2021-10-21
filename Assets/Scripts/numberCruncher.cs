@@ -9,14 +9,14 @@ public class numberCruncher : MonoBehaviour
     private float numberAmt;
     public GameObject crunchAlert;
     private bool filledAlert;
-    private Animator crunchAnim;
+    private Animator anim;
 	private AudioSource numberCruncher_audio;
 
     
     // Start is called before the first frame update
     void Start() {
         numberFill.fillAmount = 0;
-		crunchAnim = GetComponent<Animator>();
+		anim = GetComponent<Animator>();
 		numberCruncher_audio = GameObject.Find("numberCruncher_audio").GetComponent<AudioSource>();
     }
 
@@ -45,15 +45,21 @@ public class numberCruncher : MonoBehaviour
 
     private IEnumerator CrunchAlert()
     {
-        crunchAlert.SetActive(true);
+        // first, let's tell the GameManager that we're moving into the crunching phase
+		GameManager.S.preCrunchingState = true;
+
+		crunchAlert.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         crunchAlert.SetActive(false);
         yield return new WaitForSeconds(0.5f);
-        StartCoroutine(CrunchAlert());
+		if (GameManager.S.preCrunchingState) StartCoroutine(CrunchAlert());
     }
 
 	private IEnumerator Crunch(){
-		crunchAnim.SetTrigger("Slam");
+		// tell the game manager that the lever has been pulled
+		GameManager.S.preCrunchingState = false;
+		StopCoroutine(CrunchAlert());
+		anim.Play("wallsClosingIn");
 		Scream();
 		GameObject[] numbers = GameObject.FindGameObjectsWithTag("Number");
         yield return new WaitForSeconds(1f);
