@@ -1,0 +1,92 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Rock : MonoBehaviour
+{
+    public int rockHealth;
+    public bool activeRock;
+    public KeyCode h1, h2, h3;
+    public GameObject rockImage;
+    public GameObject rockChip;
+    public GameObject coin;
+    public GameObject screen2_bottom;
+    private Rigidbody2D rb;
+
+    public static Rock S;
+    
+    // Start is called before the first frame update
+    void Awake()
+    {
+        S = this;
+        rb = rockImage.GetComponent<Rigidbody2D>();
+        ResetRock();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (activeRock)
+        {
+            if (Input.GetKeyDown(h1)) DamageRock(1);
+            if (Input.GetKeyDown(h2)) DamageRock(2);
+            if (Input.GetKeyDown(h3)) DamageRock(3);
+        }
+    }
+    
+    public void DamageRock(int damageAmt)
+    {
+        if (rockHealth > 0)
+        {
+            rockHealth -= damageAmt;
+            float forceY = damageAmt * 25;
+
+            rb.AddForce(transform.up * forceY);
+
+            for (int i = 0; i <= damageAmt; i++)
+            {
+                Chip();
+            }
+        }
+        else
+        {
+            rockImage.SetActive(false);
+            StartCoroutine(RevealCoin());
+        }
+    }
+
+    public IEnumerator RevealCoin()
+    {
+        coin.SetActive(true);
+        yield return new WaitForSeconds(1);
+        screen2_bottom.SetActive(false);
+        yield return new WaitForSeconds(2);
+        screen2_bottom.SetActive(true);
+        coin.SetActive(false);
+        coin.transform.localPosition = new Vector2(-.75f, -11f);
+        ResetRock();
+
+    }
+
+    public void ResetRock()
+    {
+        rockHealth = 100;
+        activeRock = false;
+        rockImage.SetActive(false);
+        rockImage.transform.localPosition = new Vector2(-1.1f, -0.797f);
+
+    }
+
+    public void RevealRock()
+    {
+        activeRock = true;
+        rockImage.SetActive(true);
+        mathsProblem.S.ReEnterMathsPhase();
+    }
+
+    public void Chip()
+    {
+        float xPos = Random.Range(-2f, 2f);
+        Instantiate(rockChip, new Vector2(xPos, -4f), Quaternion.identity);
+    }
+}

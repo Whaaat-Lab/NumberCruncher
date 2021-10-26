@@ -31,6 +31,13 @@ public class mathsInput : MonoBehaviour {
         KeyCode.Alpha9
     };
 
+    public static mathsInput S;
+
+    void Awake()
+    {
+        S = this;
+    }
+
     // Start is called before the first frame update
     void Start() {
         numberManager = GameObject.Find("numberManager");
@@ -76,7 +83,14 @@ public class mathsInput : MonoBehaviour {
         }
     }
 
-    public IEnumerator Check() {
+    public void ExternalCheck()
+    {
+        Debug.Log("checkingn here?");
+        StartCoroutine(Check());
+    }
+
+    public IEnumerator Check()
+    {
         if (mathsInput_string == mathsProblem.S.answer) {
             // Correct
             checkSound.clip = checkSounds[0];
@@ -92,7 +106,7 @@ public class mathsInput : MonoBehaviour {
             checkSound.clip = checkSounds[1];
             crowdReaction.clip = aww;
         }
-
+        
         checkSound.Play();
         crowdReaction.Play();
 

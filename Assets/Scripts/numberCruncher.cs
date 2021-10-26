@@ -23,7 +23,7 @@ public class numberCruncher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-	    numberAmt = this.transform.hierarchyCount - 4;
+	    numberAmt = this.transform.hierarchyCount - 13;
 	    // get a percentage amount under 1
 	    float numberFillDisplay = numberAmt / GameManager.S.maxNums;
 	    numberFill.fillAmount = numberFillDisplay;
@@ -46,18 +46,18 @@ public class numberCruncher : MonoBehaviour
     private IEnumerator CrunchAlert()
     {
         // first, let's tell the GameManager that we're moving into the crunching phase
-		GameManager.S.preCrunchingState = true;
+		GameManager.S.crunchingState = true;
 
 		crunchAlert.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         crunchAlert.SetActive(false);
         yield return new WaitForSeconds(0.5f);
-		if (GameManager.S.preCrunchingState) StartCoroutine(CrunchAlert());
+		if (GameManager.S.crunchingState) StartCoroutine(CrunchAlert());
     }
 
 	private IEnumerator Crunch(){
 		// tell the game manager that the lever has been pulled
-		GameManager.S.preCrunchingState = false;
+		GameManager.S.crunchingState = false;
 		StopCoroutine(CrunchAlert());
 		anim.Play("wallsClosingIn");
 		Scream();
@@ -65,6 +65,15 @@ public class numberCruncher : MonoBehaviour
         yield return new WaitForSeconds(1f);
 		for(int i=0; i<numbers.Length; i++){
 			Destroy(numbers[i].gameObject);
-		} 
+		}
+		filledAlert = false;
+	}
+
+	private IEnumerator Reveal(){
+		yield return new WaitForSeconds(2f);
+		Rock.S.RevealRock();
+		anim.Play("revealRock");
+		yield return new WaitForSeconds(2F);
+		mathsProblem.S.ReEnterMathsPhase();
 	}
 }

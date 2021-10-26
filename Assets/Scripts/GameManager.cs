@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     // Global Variables
-    public bool preCrunchingState, crunchingState, plinkoState;
+    public bool crunchingState, plinkoState;
     public int maxNums;
     
     public static GameManager S;
