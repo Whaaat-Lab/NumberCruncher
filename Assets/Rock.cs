@@ -9,8 +9,11 @@ public class Rock : MonoBehaviour
     public KeyCode h1, h2, h3;
     public GameObject rockImage;
     public GameObject rockChip;
+    public Sprite[] rockChips;
     public GameObject coin;
     public GameObject screen2_bottom;
+    public AudioSource choir, rockHit, anvil;
+    public AudioClip[] rockHits;
     private Rigidbody2D rb;
 
     public static Rock S;
@@ -58,7 +61,8 @@ public class Rock : MonoBehaviour
     public IEnumerator RevealCoin()
     {
         coin.SetActive(true);
-        yield return new WaitForSeconds(1);
+        choir.Play();
+        yield return new WaitForSeconds(2);
         screen2_bottom.SetActive(false);
         yield return new WaitForSeconds(2);
         screen2_bottom.SetActive(true);
@@ -87,6 +91,13 @@ public class Rock : MonoBehaviour
     public void Chip()
     {
         float xPos = Random.Range(-2f, 2f);
-        Instantiate(rockChip, new Vector2(xPos, -4f), Quaternion.identity);
+        GameObject go = Instantiate(rockChip, new Vector2(xPos, -4f), Quaternion.identity);
+        int s = (int) Random.Range(0, rockChips.Length);
+        go.GetComponent<SpriteRenderer>().sprite = rockChips[s];
+        int rh = (int) Random.Range(0, rockHits.Length);
+        rockHit.PlayOneShot(rockHits[rh]);
+        float anvilPitch = Random.Range(0.5f, 1.5f);
+        anvil.pitch = anvilPitch;
+        anvil.Play();
     }
 }

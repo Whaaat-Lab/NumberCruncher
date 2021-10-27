@@ -61,15 +61,16 @@ public class numberCruncher : MonoBehaviour
 		StopCoroutine(CrunchAlert());
 		anim.Play("wallsClosingIn");
 		Scream();
-		GameObject[] numbers = GameObject.FindGameObjectsWithTag("Number");
         yield return new WaitForSeconds(1f);
-		for(int i=0; i<numbers.Length; i++){
-			Destroy(numbers[i].gameObject);
-		}
+
 		filledAlert = false;
 	}
 
 	private IEnumerator Reveal(){
+		GameObject[] numbers = GameObject.FindGameObjectsWithTag("Number");
+		for(int i=0; i<numbers.Length; i++){
+			Destroy(numbers[i].gameObject);
+		}
 		yield return new WaitForSeconds(2f);
 		Rock.S.RevealRock();
 		anim.Play("revealRock");
