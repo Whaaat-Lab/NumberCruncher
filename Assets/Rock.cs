@@ -15,6 +15,7 @@ public class Rock : MonoBehaviour
     public AudioSource choir, rockHit, anvil;
     public AudioClip[] rockHits;
     private Rigidbody2D rb;
+    public Animator a;
 
     public static Rock S;
     
@@ -26,9 +27,21 @@ public class Rock : MonoBehaviour
         ResetRock();
     }
 
+    void Start()
+    {
+        a = GetComponent<Animator>();
+        StartCoroutine(Blink());
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            a.Play("rockBlink");
+            Debug.Log("blinking?");
+        }
+        
         if (activeRock)
         {
             if (Input.GetKeyDown(h1)) DamageRock(1);
@@ -99,5 +112,14 @@ public class Rock : MonoBehaviour
         float anvilPitch = Random.Range(0.5f, 1.5f);
         anvil.pitch = anvilPitch;
         anvil.Play();
+    }
+
+    public IEnumerator Blink()
+    {
+        float r = Random.Range(1, 6);
+        yield return new WaitForSeconds(r);
+        a.Play("rock_idle");
+        StartCoroutine(Blink());
+        Debug.Log("blink?");
     }
 }
