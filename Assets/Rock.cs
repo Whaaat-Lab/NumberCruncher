@@ -55,7 +55,7 @@ public class Rock : MonoBehaviour
         if (rockHealth > 0)
         {
             rockHealth -= damageAmt;
-            float forceY = damageAmt * 25;
+            float forceY = damageAmt * 20;
 
             rb.AddForce(transform.up * forceY);
 
