@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     // Global Variables
     public bool crunchingState, plinkoState;
     public int maxNums;
+
+    public bool awake;
     
     public static GameManager S;
 

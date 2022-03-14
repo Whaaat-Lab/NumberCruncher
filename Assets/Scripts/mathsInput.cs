@@ -97,9 +97,15 @@ public class mathsInput : MonoBehaviour {
             int r = UnityEngine.Random.Range(0, yays.Length);
             crowdReaction.clip = yays[r];
             background.color = new Color(.92f, .82f, .126f, 1);
-            foreach(Transform child in numberManager.transform) {
-                child.gameObject.GetComponent<numberBehavior>().EnterCruncher();
+            // Start the Chewing Animation
+            
+            // Delete the numbers
+            foreach(Transform child in numberManager.transform)
+            {
+                Destroy(child.gameObject);
             }
+            // And create a blob
+            Stomach.S.CreateBlob();
         }
         else {
             background.color = new Color(1, 0, 0, 1);

@@ -51,6 +51,10 @@ PrefabInstance:
       propertyPath: vos.Array.data[9]
       value: 
       objectReference: {fileID: 8300000, guid: 2929790e606d447659554e1f296de141, type: 3}
+    - target: {fileID: 9040439141531456323, guid: 1131f97ef6e8f43eb9b9af4fac9a797f, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9040439141531456324, guid: 1131f97ef6e8f43eb9b9af4fac9a797f, type: 3}
       propertyPath: m_RootOrder
       value: 0
