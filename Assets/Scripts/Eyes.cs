@@ -5,9 +5,12 @@ using UnityEngine;
 public class Eyes : MonoBehaviour
 {
     public float awakeAMT;
+    public float sleepSpeed;
+    public float sleepTimer = 10f;
+
 
     private SpriteRenderer sleepyFade;
-    private float sleepTimer = 10f;
+    
     private float startTime;
     private float elapsedTime;
     
@@ -25,14 +28,14 @@ public class Eyes : MonoBehaviour
         elapsedTime = Time.time - startTime;
         if (elapsedTime > sleepTimer)
         {
-            awakeAMT += .0001f;
+            awakeAMT += sleepSpeed;
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             // Wake Up!
             startTime = Time.time;
-            //StopCoroutine(NodOff());
+            awakeAme += .1f;
             awakeAMT = 0;
             
         }
