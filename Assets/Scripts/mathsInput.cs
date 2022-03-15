@@ -99,7 +99,7 @@ public class mathsInput : MonoBehaviour {
             background.color = new Color(.92f, .82f, .126f, 1);
             // Start the Chewing Animation
             
-            yield new WaitForSeconds(1);
+            yield return new WaitForSeconds(1);
             // Delete the numbers
             foreach(Transform child in numberManager.transform)
             {

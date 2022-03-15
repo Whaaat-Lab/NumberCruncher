@@ -35,7 +35,7 @@ public class Eyes : MonoBehaviour
         {
             // Wake Up!
             startTime = Time.time;
-            awakeAme += .1f;
+            awakeAMT += .1f;
             awakeAMT = 0;
             
         }
