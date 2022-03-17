@@ -13,6 +13,8 @@ public class mathsInput : MonoBehaviour {
     private AudioSource crowdReaction;
     public SpriteRenderer background;
 
+    public Animator animator;
+
     // Sprite Version
     private KeyCode enterKey = KeyCode.Return;
     private int numNums;
@@ -61,13 +63,14 @@ public class mathsInput : MonoBehaviour {
                 // or Display Sprites
                 GameObject go = GameObject.Instantiate(animatedNumbers[i]) as GameObject;
                 go.transform.parent = numberManager.transform;
-                float xPos = numNums * 1.4f;
+                //Danny- changed from 1.4 to try to fit numbers better
+                float xPos = numNums * 1.0f; 
                 go.transform.localPosition = new Vector2(xPos, 0);
                 numNums++;
                 // Are there already numbers on the board?
                 if (numNums > 1) {
-                    // Move existing Numbers
-                    float moveAmmount = (numNums - 1) * 0.7f;
+                    // Move existing Numbers (Danny- changed from 0.4 to try and fit numbers better)
+                    float moveAmmount = (numNums - 1) * 1.3f;
                     numberManager.transform.position = new Vector2(
                         -moveAmmount,
                         numberManager.transform.position.y
@@ -98,26 +101,37 @@ public class mathsInput : MonoBehaviour {
             crowdReaction.clip = yays[r];
             background.color = new Color(.92f, .82f, .126f, 1);
             // Start the Chewing Animation
-            
-            yield return new WaitForSeconds(1);
+            animator.SetBool("eating",true);
+            yield return new WaitForSeconds(.8f);
             // Delete the numbers
             foreach(Transform child in numberManager.transform)
             {
                 Destroy(child.gameObject);
             }
+            
             // And create a blob
             Stomach.S.CreateBlob();
+            //reset animator
+            animator.SetBool("eating", false);
+
+
+
         }
         else {
             background.color = new Color(1, 0, 0, 1);
+            //run spitting animation
+            animator.SetBool("spitting", true);
             checkSound.clip = checkSounds[1];
             crowdReaction.clip = aww;
         }
         
         checkSound.Play();
         crowdReaction.Play();
+        
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(.9f);
+        animator.SetBool("spitting", false);
+        
         background.color = new Color(.4f, .46f, .61f, 1);
         Clear();
         yield return null;
