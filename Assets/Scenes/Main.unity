@@ -409,7 +409,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 15555c42e8d30422c8f0fe3e1a6bbc66, type: 3}
+    m_Font: {fileID: 12800000, guid: b5d835ad598b6450283dcc56770d50d9, type: 3}
     m_FontSize: 200
     m_FontStyle: 0
     m_BestFit: 1
@@ -551,8 +551,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.0015208333, y: 0.99700004}
   m_AnchorMax: {x: 0.0015208333, y: 0.99700004}
-  m_AnchoredPosition: {x: 1802, y: -105}
-  m_SizeDelta: {x: 148.5166, y: 148.5166}
+  m_AnchoredPosition: {x: 1723.6, y: -537.5}
+  m_SizeDelta: {x: 733, y: 349}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &272374116
 MonoBehaviour:
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2154793fff5e0417aa7ba02fc7e8d039, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 364a6b278002b4a7db8052784c375fde, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -621,7 +621,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 272374114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70ddbb682de8d45b2b50ddec3dac2f1f, type: 3}
+  m_Script: {fileID: 11500000, guid: a944ba2c0fc19499da77f095e2242894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &275841568

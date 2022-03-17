@@ -138,8 +138,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minSize: 0
   blobSprites:
-  - {fileID: -1841570250, guid: 0918c43b9b7e548d7bfd51ec9f97a736, type: 3}
-  - {fileID: 1078163600, guid: 0918c43b9b7e548d7bfd51ec9f97a736, type: 3}
-  - {fileID: 2015680829, guid: 0918c43b9b7e548d7bfd51ec9f97a736, type: 3}
-  - {fileID: -1893497803, guid: 0918c43b9b7e548d7bfd51ec9f97a736, type: 3}
-  - {fileID: -672806616, guid: 0918c43b9b7e548d7bfd51ec9f97a736, type: 3}
+  - {fileID: -1428256425, guid: 31fd40e0d62c54f39ae15da879f5b03d, type: 3}
+  - {fileID: -1837952843, guid: 31fd40e0d62c54f39ae15da879f5b03d, type: 3}
+  - {fileID: -1264060377, guid: 31fd40e0d62c54f39ae15da879f5b03d, type: 3}
+  - {fileID: -1741379408, guid: 31fd40e0d62c54f39ae15da879f5b03d, type: 3}
+  - {fileID: -1603996606, guid: 31fd40e0d62c54f39ae15da879f5b03d, type: 3}
+  - {fileID: 712738999, guid: 31fd40e0d62c54f39ae15da879f5b03d, type: 3}
