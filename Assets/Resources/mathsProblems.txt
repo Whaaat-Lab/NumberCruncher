@@ -6,4 +6,8 @@ A man walks into a bar. He has 47 dollars but owes his best friend 25 for a favo
 147 + 23=170#
 635 - 31=604#
 64 / 8=8#
-9999 - 9=9990
+9999 - 9=9990#
+33 x 8=264#
+12 x 12=144#
+2847-319=2528#
+92+91=183

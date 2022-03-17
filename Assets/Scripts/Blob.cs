@@ -8,7 +8,7 @@ public class Blob : MonoBehaviour
     public Sprite[] blobSprites;
 
     //how much one hit reduces size
-    private Vector3 scaleChange = new Vector3(0.07f, 0.07f, 0f);
+    private Vector3 scaleChange = new Vector3(0.04f, 0.04f, 0f);
     
     // Start is called before the first frame update
     void Start()
