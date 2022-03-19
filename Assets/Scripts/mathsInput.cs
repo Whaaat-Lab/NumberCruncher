@@ -87,7 +87,7 @@ public class mathsInput : MonoBehaviour {
                     if (numNums > 1)
                     {
                         // Move existing Numbers (Danny- changed from 0.4 to try and fit numbers better)
-                        float moveAmmount = (numNums - 1) * 1.3f;
+                        float moveAmmount = (numNums - 1) * 1.5f;
                         numberManager.transform.position = new Vector2(
                             -moveAmmount,
                             numberManager.transform.position.y
@@ -122,6 +122,7 @@ public class mathsInput : MonoBehaviour {
         {
             // Wake Up!
             startTime = Time.time;
+            animator.SetInteger("sleepy", 0);
             awake = true;
             mathsProblem.S.WakeUp();
         }
