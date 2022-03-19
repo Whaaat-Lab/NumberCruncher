@@ -12,14 +12,24 @@ public class mathsInput : MonoBehaviour {
     private AudioSource checkSound;
     private AudioSource crowdReaction;
     public SpriteRenderer background;
+    public bool awake; 
 
     public Animator animator;
+
+    //from the eyes script
+    public float sleepSpeed;
+    public float sleepyThresh = 10f;
+    public float asleepThresh = 20f;
 
     // Sprite Version
     private KeyCode enterKey = KeyCode.Return;
     private int numNums;
     private GameObject  numberManager;
-    
+
+    //from eye script
+    private float startTime;
+    private float elapsedTime;
+
     private KeyCode[] numberInputs = {
         KeyCode.Alpha0,
         KeyCode.Alpha1,
@@ -42,6 +52,8 @@ public class mathsInput : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        startTime = Time.time;
+        awake = true;
         numberManager = GameObject.Find("numberManager");
         checkSound = GameObject.Find("ResultSound").GetComponent<AudioSource>();
         crowdReaction = GameObject.Find("audienceReaction").GetComponent<AudioSource>();
@@ -51,40 +63,71 @@ public class mathsInput : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        // go through the possible alpha keys
-        for (int i = 0; i < numberInputs.Length; i++) {
-            if (Input.GetKeyDown(numberInputs[i])) {
+        if (awake)
+        {
+            // go through the possible alpha keys
+            for (int i = 0; i < numberInputs.Length; i++)
+            {
+                if (Input.GetKeyDown(numberInputs[i]))
+                {
 
-                // add it to the string if it was pressed
-                mathsInput_string += i.ToString();
-                // Display String
-                // mathsInput_displayText.text = mathsInput_string;
+                    // add it to the string if it was pressed
+                    mathsInput_string += i.ToString();
+                    // Display String
+                    // mathsInput_displayText.text = mathsInput_string;
 
-                // or Display Sprites
-                GameObject go = GameObject.Instantiate(animatedNumbers[i]) as GameObject;
-                go.transform.parent = numberManager.transform;
-                //Danny- changed from 1.4 to try to fit numbers better
-                float xPos = numNums * 1.0f; 
-                go.transform.localPosition = new Vector2(xPos, 0);
-                numNums++;
-                // Are there already numbers on the board?
-                if (numNums > 1) {
-                    // Move existing Numbers (Danny- changed from 0.4 to try and fit numbers better)
-                    float moveAmmount = (numNums - 1) * 1.3f;
-                    numberManager.transform.position = new Vector2(
-                        -moveAmmount,
-                        numberManager.transform.position.y
-                    );
+                    // or Display Sprites
+                    GameObject go = GameObject.Instantiate(animatedNumbers[i]) as GameObject;
+                    go.transform.parent = numberManager.transform;
+                    //Danny- changed from 1.4 to try to fit numbers better
+                    float xPos = numNums * 1.0f;
+                    go.transform.localPosition = new Vector2(xPos, 0);
+                    numNums++;
+                    // Are there already numbers on the board?
+                    if (numNums > 1)
+                    {
+                        // Move existing Numbers (Danny- changed from 0.4 to try and fit numbers better)
+                        float moveAmmount = (numNums - 1) * 1.3f;
+                        numberManager.transform.position = new Vector2(
+                            -moveAmmount,
+                            numberManager.transform.position.y
+                        );
+                    }
+
                 }
-                
+
+
+            }
+
+            if (Input.GetKeyDown(enterKey))
+            {
+                // Check the Answer
+                StartCoroutine(Check());
             }
         }
 
-        if (Input.GetKeyDown(enterKey)) {
-            // Check the Answer
-            StartCoroutine(Check());
+        // sleepy animations
+        elapsedTime = Time.time - startTime;
+        if (elapsedTime < sleepyThresh) { animator.SetInteger("sleepy", 0); }
+        if (elapsedTime > sleepyThresh) { animator.SetInteger("sleepy", 1); }
+        if (elapsedTime > asleepThresh)
+        {
+            animator.SetInteger("sleepy", 2);
+            awake = false;
+            mathsProblem.S.Asleep();
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            // Wake Up!
+            startTime = Time.time;
+            awake = true;
+            mathsProblem.S.WakeUp();
         }
     }
+
+
 
     public void ExternalCheck()
     {
@@ -127,13 +170,14 @@ public class mathsInput : MonoBehaviour {
         
         checkSound.Play();
         crowdReaction.Play();
-        
 
+        //moved this clear before the spitting delay
+        Clear();
         yield return new WaitForSeconds(.9f);
         animator.SetBool("spitting", false);
         
         background.color = new Color(.4f, .46f, .61f, 1);
-        Clear();
+        
         yield return null;
     }
 

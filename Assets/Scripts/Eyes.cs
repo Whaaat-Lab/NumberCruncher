@@ -10,10 +10,10 @@ public class Eyes : MonoBehaviour
 
 
     private SpriteRenderer sleepyFade;
-    
+
     private float startTime;
     private float elapsedTime;
-    
+
     // Start is called before the first frame update
     void Start()
     {

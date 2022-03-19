@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // generally 35, but less for testing purposes
-        maxNums = 20;
+        maxNums = 10;
     }
 
     // Update is called once per frame
