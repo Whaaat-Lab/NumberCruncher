@@ -6,7 +6,7 @@ public class Blob : MonoBehaviour
 {
     public float minSize;
     public Sprite[] blobSprites;
-
+    
     //how much one hit reduces size
     private Vector3 scaleChange = new Vector3(0.04f, 0.04f, 0f);
     
@@ -27,6 +27,12 @@ public class Blob : MonoBehaviour
             Rigidbody2D rb = this.GetComponent<Rigidbody2D>();
             rb.AddForce(transform.right * 300f);
             this.transform.localScale -= scaleChange;
+        }
+
+        if (this.transform.localPosition.y < -4f)
+        {
+            Intestine.S.Fill();
+            Destroy(this.gameObject);
         }
     }
 }
