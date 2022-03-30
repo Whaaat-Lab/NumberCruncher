@@ -8,7 +8,7 @@ public class Blob : MonoBehaviour
     public Sprite[] blobSprites;
     
     //how much one hit reduces size
-    private Vector3 scaleChange = new Vector3(0.04f, 0.04f, 0f);
+    private Vector3 scaleChange = new Vector3(0.11f, 0.11f, 0f);
     
     // Start is called before the first frame update
     void Start()
@@ -25,11 +25,11 @@ public class Blob : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             Rigidbody2D rb = this.GetComponent<Rigidbody2D>();
-            rb.AddForce(transform.right * 300f);
+            rb.AddForce(transform.right * 350f);
             this.transform.localScale -= scaleChange;
         }
 
-        if (this.transform.localPosition.y < -4f)
+        if (this.transform.localPosition.y < -16f)
         {
             Intestine.S.Fill();
             Destroy(this.gameObject);

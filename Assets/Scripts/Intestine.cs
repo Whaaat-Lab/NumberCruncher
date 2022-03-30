@@ -9,6 +9,9 @@ public class Intestine : MonoBehaviour
     public static Intestine S;
     public float fillSpeed;
     public Image intestineFill;
+    public Animator stomachAnim;
+    public string portName;
+
 
     private float fill;
 
@@ -24,9 +27,11 @@ public class Intestine : MonoBehaviour
 
     void Start()
     {
-        // Serial setup
-        //_port = new SerialPort(COM1, 9600);
-        //_port.Open();
+        //Serial setup;
+        _port = new SerialPort(portName, 9600);
+        _port.Open();
+        _port.ReadTimeout =5000;
+        _port.WriteTimeout =5000;
     }
 
     // Update is called once per frame
@@ -34,12 +39,22 @@ public class Intestine : MonoBehaviour
     {
         fill += fillSpeed;
         intestineFill.fillAmount = fill;
+        stomachAnim.ResetTrigger("poop");
 
         if (fill >= 1)
         {
-            //_port.Write(1);
+            if (_port.IsOpen)
+            {
+               _port.Write("1");
+                Debug.Log(1);
+            }
+            stomachAnim.SetTrigger("poop");
             fill = 0;
             intestineFill.fillAmount = 0;
+
+            
+        
+
         }
     }
 }

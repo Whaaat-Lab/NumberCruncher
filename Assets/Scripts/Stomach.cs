@@ -5,8 +5,6 @@ using UnityEngine;
 public class Stomach : MonoBehaviour
 {
     public GameObject blob;
-    
-   
 
     public static Stomach S;
 
